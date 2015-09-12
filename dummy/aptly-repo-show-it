@@ -1,0 +1,33 @@
+Name: it
+Comment: repo
+Default Distribution: trusty
+Default Component: main
+Number of packages: 27
+Packages:
+  active_1.0-2_all
+  active-bpm-jdbc_1.0-1_all
+  docflow-config_1_all
+  orders_3.20150827-1_all
+  orders_3.20150901-1_all
+  orders_3.20150903-0ubuntu1_all
+  orders_3.20150903-1_all
+  orders-processes_3.20150827-1_all
+  orders-processes_3.20150901-1_all
+  orders-xsls_3.20150827-1_all
+  orders-xsls_3.20150901-1_all
+  db-server_2.2_all
+  db-server_2.2-1_all
+  ca_0.0.1ubuntu1_amd64
+  hhvm_3.7.2~trusty_amd64
+  hhvm-dev_3.7.2~trusty_amd64
+  ca_0.0.1ubuntu1_source
+  docflow-config_1_source
+  orders_3.20150827-1_source
+  orders_3.20150901-1_source
+  orders_3.20150903-0ubuntu1_source
+  orders-processes_3.20150827-1_source
+  orders-processes_3.20150901-1_source
+  orders-xsls_3.20150827-1_source
+  orders-xsls_3.20150901-1_source
+  db-server_2.2_source
+  db-server_2.2-1_source

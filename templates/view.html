@@ -1,0 +1,101 @@
+{% import _self as mac %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<title>{% block title %} Default {% endblock %}</title>
+	
+	<link href="components/require.css" rel="stylesheet" type="text/css">
+	<script src="components/require.js"></script>
+	<script>require(['bootstrap']);</script>
+	<script src="script.js"></script>
+
+	<!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+</head>
+<body>
+	<table class="table table-striped">
+		<tr>
+			<th>N</th>
+			<th>Package</th>
+			{% for r in repolist %}
+				<th>{{ r.displayName }}</th>
+			{% endfor %}
+		</tr>		
+		{% set index = 0 %}
+		{% for lbl, pkglist in packages %}
+			<tr class="alert-info">
+				<td colspan="{{ (repolist|length) +2 }}">
+					{% if labellist[lbl] is defined %}
+						<span style="font-size:100%" class="label label-primary">{{ labellist[lbl] }}</span>
+					{% elseif lbl == 'default'%}
+						<span style="font-size:100%" class="label label-default">default</span>
+					{% else %}
+						<span style="font-size:100%" class="label label-warning">{{ lbl }}</span>
+					{% endif %}					
+				</td>
+			</tr>		
+			{% for p in pkglist|sort %}
+				{% set index = index +1 %}
+				<tr class="package">
+					<td>{{ index }}</td>
+					<td>
+						{{ mac.label_list(labellist) }}
+						{{ p }}
+						{% for extlbl in labels[p] if extlbl != lbl %}
+							<span class="label label-info">{{ extlbl }}</span>
+						{% endfor %}
+					</td>
+					{% for r in repolist|keys %}
+					<td><span data-toggle="popover">
+						{% set vers = versions[p].repo[r]|keys %}
+						{% set v    = vers|first %}
+						{{ mac.vers_item(v, versions[p].repo[r][v]) }}
+
+						{% if vers|length > 1 %}
+							<span class="badge">{{ vers|length }}</span>
+						{% endif %}
+						<div style="display:none">
+						{% for v in vers %}
+							{{ mac.vers_item(v, versions[p].repo[r][v]) }}
+						{% endfor %}
+						</div>
+					</span></td>
+					{% endfor %}
+				</tr>
+
+			{% endfor %} {# packages itself #}
+		{% endfor %} {# packages labels #}
+	</table>
+</body>
+</html>
+
+{% macro label_list(labellist) %}
+	<div class="dropdown pull-left" style="margin-right:1em">
+		<button class="btn btn-default dropdown-toggle btn-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			{% for k,v in labellist %}
+			<li><a href="#">{{ v }}</a></li>
+			{% endfor %}
+			<li><a href="#">
+				<input type="text" placeholder="New Label">
+			</a></li>
+		</ul>
+	</div>
+{% endmacro %}
+
+{% macro vers_item(vers, data) %}
+	{% set arch = data %}
+	<span style="display:inline-block;width:5em;">
+	{% if arch.all is defined or arch.amd64 is defined %} [64] {% endif %}
+	{% if arch.source is defined %} [src] {% endif %}
+	</span>
+	<span style="display:inline-block;width:8em;">
+		{{ vers }}
+	</span>
+{% endmacro %}

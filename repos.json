@@ -1,0 +1,14 @@
+{
+"repos": {
+	"et": {
+		"type": "deb",
+		"displayName": "repo",
+		"repo": "et"
+	},
+	"it": {
+		"type": "deb",
+		"displayName": "internal",
+		"repo": "it"
+	}
+}
+}

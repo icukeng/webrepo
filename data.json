@@ -1,0 +1,20 @@
+{
+	"labels": {
+		"dev": "dev",
+		"3rd": "3rd-party",
+		"docflow": "docflow",
+		"external": "external"
+	},
+	"maps": {
+		"active": ["docflow", "external"],
+		"active-jdbc": ["docflow", "external"],
+		"docflow-config": ["docflow"],
+		"orders":["docflow"],
+		"orders-processes": ["docflow"],
+		"orders-xsls": ["docflow"],
+		"db-server": ["docflow", "external"],
+		"server": ["docflow" , "external"],
+		"hhvm":["3rd"],
+		"hhvm-dev": ["3rd"]
+	}
+}
