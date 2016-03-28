@@ -15,6 +15,8 @@ $view->parserExtensions = array(
 	new \Slim\Views\TwigExtension(),
 	new \Twig_Extension_Debug()
 );
+// defining baseUrl
+$view->getEnvironment()->addGlobal('baseUrl', 'http://localhost:8080');
 // =======================================================
 $SYSCONF = json_decode(file_get_contents('repos.json'), true);
 $USRCONF = json_decode(file_get_contents('data.json'), true);
@@ -56,5 +58,21 @@ $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 		"labels"    => $USRCONF['maps'],
 		"versions"  => $versions,
 	));
+});
+// creates job
+$app->post('/execution', function() use ($app) {
+	// write to .json file the name of file that needs to be builded
+	$fp = fopen('job.json', 'w+');
+	fwrite($fp, json_encode(['name' => $app->request->post('name')]));
+	fclose($fp);
+	return $app->response()->body(true);
+});
+// get execution status
+$app->get('/status', function() use ($app) {
+	$status = json_decode(file_get_contents('status.json'));
+	$response = $app->response();
+	$response['Content-Type'] = 'application/json';
+	$response->status(200);
+	$response->body(json_encode($status));
 });
 $app->run();

@@ -1,0 +1,10 @@
+.console-list {
+    display: none;
+    background-color: #000;
+    border: 1px solid;
+    border-radius: 0.5em;
+}
+.console-list > li {
+    color: #fff;
+    list-style-type: none;
+}

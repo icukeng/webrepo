@@ -1,4 +1,5 @@
 {% import _self as mac %}
+{% include 'modal-execution.html' %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -7,8 +8,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<title>{% block title %} Default {% endblock %}</title>
-	
+
 	<link href="components/require.css" rel="stylesheet" type="text/css">
+	<link href="style/style.css" rel="stylesheet" type="text/css">
 	<script src="components/require.js"></script>
 	<script>require(['bootstrap']);</script>
 	<script src="script.js"></script>
@@ -19,6 +21,7 @@
 	<table class="table table-striped">
 		<tr>
 			<th>N</th>
+			<th>Action</th>
 			<th>Package</th>
 			{% for r in repolist %}
 				<th>{{ r.displayName }}</th>
@@ -27,20 +30,24 @@
 		{% set index = 0 %}
 		{% for lbl, pkglist in packages %}
 			<tr class="alert-info">
-				<td colspan="{{ (repolist|length) +2 }}">
+				<td colspan="{{ (repolist|length) +3 }}">
 					{% if labellist[lbl] is defined %}
 						<span style="font-size:100%" class="label label-primary">{{ labellist[lbl] }}</span>
 					{% elseif lbl == 'default'%}
 						<span style="font-size:100%" class="label label-default">default</span>
 					{% else %}
 						<span style="font-size:100%" class="label label-warning">{{ lbl }}</span>
-					{% endif %}					
+					{% endif %}
 				</td>
 			</tr>		
 			{% for p in pkglist|sort %}
 				{% set index = index +1 %}
 				<tr class="package">
 					<td>{{ index }}</td>
+					<td>
+						<button class="build btn btn-primary btn-sm" data-url="{{ baseUrl }}"
+							data-toggle="modal" data-target="#modal-execution" data-name="{{ p }}">Собрать</button>
+					</td>
 					<td>
 						{{ mac.label_list(labellist) }}
 						{{ p }}
