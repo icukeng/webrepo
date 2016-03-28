@@ -23,7 +23,7 @@ var getStatus = function (el) {
 		data: {name: $(el).data('name')}
 	}).done(function(data) {
 		console.log('done');
-		$console = $('.console-list');
+		$console = $('.shell-body');
 		$console.empty();
 		$.each(data, function(k, v) {
 			$console.append("<li>" + v + "</li>");
@@ -36,7 +36,8 @@ var getStatus = function (el) {
 $(function(){
 	$('.build').on('click', function(e) {
 		var el = e.target;
-		$('#modal-execution').on('shown.bs.modal', function (e) {
+		$('#modal-execution').on('shown.bs.modal', function () {
+			$('.shell-top-bar').html($(el).data('name'));
 			getExecution(this);
 		}.apply(this, el));
 	});
