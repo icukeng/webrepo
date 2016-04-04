@@ -1,0 +1,5 @@
+.webrepo-table-striped > tbody > tr.package {
+    background-color: #F9F9F9;
+}
+.package-version { display: none; }
+.package-label { cursor:pointer; }
