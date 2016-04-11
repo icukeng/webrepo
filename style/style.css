@@ -35,6 +35,7 @@
 }
 
 .shell-body {
+    overflow: auto;
     margin: 0;
     padding: 5px;
     list-style: none;

@@ -16,7 +16,7 @@ $view->parserExtensions = array(
 	new \Twig_Extension_Debug()
 );
 // defining baseUrl
-$view->getEnvironment()->addGlobal('baseUrl', 'http://localhost:8080');
+$view->getEnvironment()->addGlobal('baseUrl', $app->request->getScriptName());
 // =======================================================
 $SYSCONF = json_decode(file_get_contents('repos.json'), true);
 $USRCONF = json_decode(file_get_contents('data.json'), true);

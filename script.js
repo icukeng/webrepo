@@ -7,7 +7,7 @@ var getExecution = function(el) {
 		method: 'POST',
 		dataType: 'JSON',
 		data: {name: $(el).data('name')}
-	}).done(function(data) {
+	}).done(function() {
 		console.log('2nd ajax');
 		getStatus(el);
 	}).fail(function() {
@@ -19,8 +19,7 @@ var getStatus = function (el) {
 	$.ajax({
 		url: $(el).data('url') + '/status',
 		method: 'GET',
-		dataType: 'JSON',
-		data: {name: $(el).data('name')}
+		dataType: 'JSON'
 	}).done(function(data) {
 		console.log('done');
 		$console = $('.shell-body');
@@ -29,7 +28,10 @@ var getStatus = function (el) {
 			$console.append("<li>" + v + "</li>");
 		});
 		$console.show();
-		setTimeout(getStatus.bind(null, el), 2000);
+		// stop making requests, when modal is closed
+		if($('#modal-execution').is(":visible")) {
+			setTimeout(getStatus.bind(null, el), 2000);
+		}
 	});
 };
 
@@ -41,7 +43,6 @@ $(function(){
 			getExecution(this);
 		}.apply(this, el));
 	});
-
 	/*$("[data-toggle=popover]").popover({
 		html : true, 
 		placement: 'bottom',
