@@ -57,4 +57,15 @@ $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 		"versions"  => $versions,
 	));
 });
+
+$app->post('/copy/', function () use($app, $SYSCONF) {
+	$rx = $app->request->params('rx');
+	$tx = $app->request->params('tx');
+	$pkg  = $app->request->params('pkg');
+	$vers = $app->request->params('vers');
+	$t = (new Transfer(new DebRepo($tx), new DebRepo($rx)))->copy($pkg, $vers);
+	if($t) echo 'OK';
+	else   echo 'FAIL';
+})->name('copy');
+
 $app->run();
