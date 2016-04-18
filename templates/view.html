@@ -15,16 +15,16 @@
 	<script>require(['bootstrap']);</script>
 	<script src="script.js"></script>
 
-	<!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<table class="table table-striped">
+	<table class="table webrepo-table-striped">
 		<tr>
 			<th>N</th>
 			<th>Action</th>
 			<th>Package</th>
 			{% for r in repolist %}
-				<th>{{ r.displayName }}</th>
+				<th data-repo="{{r.repo}}">{{ r.displayName }}</th>
 			{% endfor %}
 		</tr>		
 		{% set index = 0 %}
@@ -41,6 +41,7 @@
 				</td>
 			</tr>		
 			{% for p in pkglist|sort %}
+
 				{% set index = index +1 %}
 				<tr class="package">
 					<td>{{ index }}</td>
@@ -50,13 +51,17 @@
 					</td>
 					<td>
 						{{ mac.label_list(labellist) }}
-						{{ p }}
+						<span class="package-label" data-name="{{p}}">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							{{ p }}
+						</span>
 						{% for extlbl in labels[p] if extlbl != lbl %}
 							<span class="label label-info">{{ extlbl }}</span>
 						{% endfor %}
 					</td>
 					{% for r in repolist|keys %}
-					<td><span data-toggle="popover">
+					<td class="droppable">
+						<span class="popover-run">
 						{% set vers = versions[p].repo[r]|keys %}
 						{% set v    = vers|first %}
 						{{ mac.vers_item(v, versions[p].repo[r][v]) }}
@@ -64,19 +69,34 @@
 						{% if vers|length > 1 %}
 							<span class="badge">{{ vers|length }}</span>
 						{% endif %}
-						<div style="display:none">
+						</span>
+						<div class="popover" style="display:none">
 						{% for v in vers %}
 							{{ mac.vers_item(v, versions[p].repo[r][v]) }}
 						{% endfor %}
 						</div>
-					</span></td>
+					</td>
 					{% endfor %}
 				</tr>
+				{% set vers = versions[p].version %}
+				{% for v in vers|keys %}
+					<tr class="package-version">
+						<td></td><td></td>
+						{% for r in repolist|keys %}
+						<td>
+							{% if vers[v][r]|length > 0 %}
+								{{ mac.vers_item(v, vers[v][r]) }}
+							{% endif %}
+						</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
 
 			{% endfor %} {# packages itself #}
 		{% endfor %} {# packages labels #}
 	</table>
 </body>
+<pre>{{ dump(versions) }}</pre>
 </html>
 
 {% macro label_list(labellist) %}
@@ -102,7 +122,7 @@
 	{% if arch.all is defined or arch.amd64 is defined %} [64] {% endif %}
 	{% if arch.source is defined %} [src] {% endif %}
 	</span>
-	<span style="display:inline-block;width:8em;">
+	<span class="draggable" style="display:inline-block;width:8em;" data-version="{{vers}}">
 		{{ vers }}
 	</span>
 {% endmacro %}

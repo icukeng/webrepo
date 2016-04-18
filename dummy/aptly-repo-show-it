@@ -5,7 +5,7 @@ Default Component: main
 Number of packages: 27
 Packages:
   active_1.0-2_all
-  active-bpm-jdbc_1.0-1_all
+  active-jdbc_1.0-1_all
   docflow-config_1_all
   orders_3.20150827-1_all
   orders_3.20150901-1_all

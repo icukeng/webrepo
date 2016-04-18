@@ -28,7 +28,7 @@ $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 		$r = new DebRepo($params['repo']);
 		$list = $r->content();
 		foreach ($list as $item)
-			$registry->register( $params['repo'], $item['name'],$item['vers'], $item['arch']);	
+			$registry->register( $params['repo'], $item['name'], $item['vers'], $item['arch']);
 	}
 	// loading labels
 	$packages = $registry->find()->group(array('name'), 'name');
@@ -52,13 +52,23 @@ $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 	foreach ($version1 as $k => $v) $versions[$k]['repo'] = $v;
 	foreach ($version2 as $k => $v) $versions[$k]['version'] = $v;
 	$app->render('view.html', array(
-		'repolist'  => $SYSCONF['repos'],
-		"labellist" => $USRCONF['labels'],
+		'repolist'  => $SYSCONF['repos'],  // classifier
+		"labellist" => $USRCONF['labels'], // classifier
 		'packages'  => $labeled_packages,
 		"labels"    => $USRCONF['maps'],
 		"versions"  => $versions,
 	));
 });
+
+$app->post('/copy/', function () use($app, $SYSCONF) {
+	$rx = $app->request->params('rx');
+	$tx = $app->request->params('tx');
+	$pkg  = $app->request->params('pkg');
+	$vers = $app->request->params('vers');
+	$t = (new Transfer(new DebRepo($tx), new DebRepo($rx)))->copy($pkg, $vers);
+	if($t) echo 'OK';
+	else   echo 'FAIL';
+})->name('copy');
 // creates job
 $app->post('/execution', function() use ($app) {
 	// write to .json file the name of file that needs to be builded
