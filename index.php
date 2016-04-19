@@ -15,11 +15,12 @@ $view->parserExtensions = array(
 	new \Slim\Views\TwigExtension(),
 	new \Twig_Extension_Debug()
 );
+$view->setTemplatesDirectory(__DIR__ . '/templates');
 // defining baseUrl
-$view->getEnvironment()->addGlobal('baseUrl', $app->request->getScriptName());
+//$view->getEnvironment()->addGlobal('baseUrl', $app->request->getScriptName());
 // =======================================================
-$SYSCONF = json_decode(file_get_contents('repos.json'), true);
-$USRCONF = json_decode(file_get_contents('data.json'), true);
+$SYSCONF = json_decode(file_get_contents(__DIR__ . '/repos.json'), true);
+$USRCONF = json_decode(file_get_contents(__DIR__ . '/data.json'), true);
 // =======================================================
 $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 	$registry = new PackageList();
@@ -71,18 +72,21 @@ $app->post('/copy/', function () use($app, $SYSCONF) {
 })->name('copy');
 // creates job
 $app->post('/execution', function() use ($app) {
+	$name = $app->request->post('name');
 	// write to .json file the name of file that needs to be builded
-	$fp = fopen('job.json', 'w+');
-	fwrite($fp, json_encode(['name' => $app->request->post('name')]));
+	$fp = fopen($name . '-job.json', 'w+');
+	fwrite($fp, json_encode(['name' => $name]));
 	fclose($fp);
 	return $app->response()->body(true);
 });
 // get execution status
 $app->get('/status', function() use ($app) {
-	$status = json_decode(file_get_contents('status.json'));
+//	$status = json_decode(file_get_contents('status.json'));
+	$status = file_get_contents($app->request->get('name') . '-status.log');
+	$statusJSON = json_encode(preg_split("#[\r\n]+#", $status));
 	$response = $app->response();
 	$response['Content-Type'] = 'application/json';
 	$response->status(200);
-	$response->body(json_encode($status));
+	$response->body($statusJSON);
 });
 $app->run();

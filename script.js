@@ -37,17 +37,15 @@ function doDroppable(ctx) {
 	});
 }
 
-require(['jquery'], function ($) {
+require(['jquery', 'jquery-ui'], function ($) {
 
 var getExecution = function(el) {
-	console.log(el);
 	$.ajax({
-		url: $(el).data('url') + '/execution',
+		url: '/execution',
 		method: 'POST',
 		dataType: 'JSON',
 		data: {name: $(el).data('name')}
 	}).done(function() {
-		console.log('2nd ajax');
 		getStatus(el);
 	}).fail(function() {
 		console.log('fail');
@@ -56,31 +54,45 @@ var getExecution = function(el) {
 
 var getStatus = function (el) {
 	$.ajax({
-		url: $(el).data('url') + '/status',
+		url: '/status',
 		method: 'GET',
-		dataType: 'JSON'
+		dataType: 'JSON',
+		data: {name: $(el).data('name')}
 	}).done(function(data) {
-		console.log('done');
-		$console = $('.shell-body');
+		// check for finishing command execution
+		if(data === 'true') {
+			$('.cssload-container[data-name=' + $(el).data('name') + ']').hide();
+			$('.build[data-name=' + $(el).data('name') + ']').show();
+		} else {
+			$('.build[data-name=' + $(el).data('name') + ']').hide();
+			$('.cssload-container[data-name=' + $(el).data('name') + ']').show();
+		}
+		// specify shell-body by id
+		$console = $(document.getElementById($(el).data('name')));
+		// retrieve shell-body with required name
 		$console.empty();
 		$.each(data, function(k, v) {
 			$console.append("<li>" + v + "</li>");
 		});
 		$console.show();
-		// stop making requests, when modal is closed
-		if($('#modal-execution').is(":visible")) {
-			setTimeout(getStatus.bind(null, el), 2000);
-		}
+		// status polling
+		setTimeout(getStatus.bind(null, el), 2000);
 	});
 };
 
 $(function(){
 	$('.build').on('click', function(e) {
 		var el = e.target;
+		// specify element by id
+		$('.shell-body').attr('id', $(el).data('name'));
 		$('#modal-execution').on('shown.bs.modal', function () {
-			$('.shell-top-bar').html($(el).data('name'));
+			$('.modal-title').html($(el).data('name'));
 			getExecution(this);
 		}.apply(this, el));
+	});
+	$('.cssload-container').on('click', function(e) {
+		// specify element by id
+		$('.shell-body').attr('id', $(this).data('name'))
 	});
 	$(".popover-run").popover({
 		html : true,
@@ -115,12 +127,9 @@ $(function(){
 	});
 });
 
+$(function() {
+	doDraggable(document);
+	doDroppable(document);
+});
 
-}); //define
-
-require(['jquery', 'jquery-ui'], function ($, $ui) {
-	$(function() {
-		doDraggable(document);
-		doDroppable(document);
-	});
 }); //define

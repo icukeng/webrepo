@@ -14,28 +14,29 @@
 	<script src="components/require.js"></script>
 	<script>require(['bootstrap']);</script>
 	<script src="script.js"></script>
-
-	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<table class="table webrepo-table-striped">
 		<tr>
 			<th>N</th>
-			<th>Action</th>
 			<th>Package</th>
 			{% for r in repolist %}
 				<th data-repo="{{r.repo}}">{{ r.displayName }}</th>
 			{% endfor %}
+			<th>Action</th>
 		</tr>		
 		{% set index = 0 %}
 		{% for lbl, pkglist in packages %}
 			<tr class="alert-info">
 				<td colspan="{{ (repolist|length) +3 }}">
 					{% if labellist[lbl] is defined %}
+						{% set packageName = labellist[lbl] %}
 						<span style="font-size:100%" class="label label-primary">{{ labellist[lbl] }}</span>
 					{% elseif lbl == 'default'%}
+						{% set packageName = 'default' %}
 						<span style="font-size:100%" class="label label-default">default</span>
 					{% else %}
+						{% set packageName = lbl %}
 						<span style="font-size:100%" class="label label-warning">{{ lbl }}</span>
 					{% endif %}
 				</td>
@@ -45,10 +46,6 @@
 				{% set index = index +1 %}
 				<tr class="package">
 					<td>{{ index }}</td>
-					<td>
-						<button class="build btn btn-primary btn-sm" data-url="{{ baseUrl }}"
-							data-toggle="modal" data-target="#modal-execution" data-name="{{ p }}">Build</button>
-					</td>
 					<td>
 						{{ mac.label_list(labellist) }}
 						<span class="package-label" data-name="{{p}}">
@@ -77,6 +74,15 @@
 						</div>
 					</td>
 					{% endfor %}
+					<td>
+						<button class="build btn btn-primary btn-sm" data-name="{{ p ~ '-' ~ lbl }}"
+										data-toggle="modal" data-target="#modal-execution">Build</button>
+						<!-- waiting icon -->
+						<div class="cssload-container" data-name="{{ p ~ '-' ~ lbl }}"
+								 data-toggle="modal" data-target="#modal-execution">
+							<div class="cssload-double-torus pull-left"></div>
+						</div>
+					</td>
 				</tr>
 				{% set vers = versions[p].version %}
 				{% for v in vers|keys %}
@@ -91,7 +97,6 @@
 						{% endfor %}
 					</tr>
 				{% endfor %}
-
 			{% endfor %} {# packages itself #}
 		{% endfor %} {# packages labels #}
 	</table>

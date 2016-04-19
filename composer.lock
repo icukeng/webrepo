@@ -4,24 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97d7948c4d543582071d75cb1be9350a",
+    "hash": "8acf694f99bafd5f5fb66597d6f4d4ef",
+    "content-hash": "4de6c0741133509b9ead68c3c4afa013",
     "packages": [
         {
             "name": "components/bootstrap",
-            "version": "3.3.5",
+            "version": "3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "d71c2a234c61f53f1109a26ba8155902a51f8ca5"
+                "reference": "fb4923919c620b8b2aa8a11eda16b49b0a9e8a27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/d71c2a234c61f53f1109a26ba8155902a51f8ca5",
-                "reference": "d71c2a234c61f53f1109a26ba8155902a51f8ca5",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/fb4923919c620b8b2aa8a11eda16b49b0a9e8a27",
+                "reference": "fb4923919c620b8b2aa8a11eda16b49b0a9e8a27",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": ">=1.9.1 <3.0"
+                "components/jquery": "1.9.1 - 2"
             },
             "suggest": {
                 "components/bootstrap-default": "Provide a theme for Bootstrap as components/bootstrap only provides the CSS as file assets"
@@ -72,7 +73,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2015-06-17 06:08:09"
+            "time": "2015-11-24 20:19:41"
         },
         {
             "name": "components/bootstrap-default",
@@ -129,16 +130,16 @@
         },
         {
             "name": "components/jquery",
-            "version": "2.1.4",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jquery.git",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c"
+                "reference": "7894addbce3c4de6f82449610e6f8e168b49e9b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/7b1d1104656a092423fbfba13c5920e9bbba290c",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c",
+                "url": "https://api.github.com/repos/components/jquery/zipball/7894addbce3c4de6f82449610e6f8e168b49e9b0",
+                "reference": "7894addbce3c4de6f82449610e6f8e168b49e9b0",
                 "shasum": ""
             },
             "type": "component",
@@ -167,7 +168,7 @@
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2015-05-08 05:04:47"
+            "time": "2016-02-24 08:16:25"
         },
         {
             "name": "components/jqueryui",
@@ -256,20 +257,17 @@
         },
         {
             "name": "components/underscore",
-            "version": "1.7.0",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/underscore.git",
-                "reference": "dc64d58f5d1079e5822d480110b28d724bda06c2"
+                "reference": "91142c898763ca8bb23a32a9808735e4998839d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/underscore/zipball/dc64d58f5d1079e5822d480110b28d724bda06c2",
-                "reference": "dc64d58f5d1079e5822d480110b28d724bda06c2",
+                "url": "https://api.github.com/repos/components/underscore/zipball/91142c898763ca8bb23a32a9808735e4998839d1",
+                "reference": "91142c898763ca8bb23a32a9808735e4998839d1",
                 "shasum": ""
-            },
-            "require": {
-                "robloach/component-installer": "*"
             },
             "type": "component",
             "extra": {
@@ -305,42 +303,41 @@
                 "server",
                 "util"
             ],
-            "time": "2014-09-22 16:48:28"
+            "time": "2015-10-16 14:27:39"
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.3.0",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "56cb5d6dec9e7a68a4da2fa89844f39d41092f31"
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/56cb5d6dec9e7a68a4da2fa89844f39d41092f31",
-                "reference": "56cb5d6dec9e7a68a4da2fa89844f39d41092f31",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/9928f7c4ad98b234e3559d1049abd13387f86db5",
+                "reference": "9928f7c4ad98b234e3559d1049abd13387f86db5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1",
-                "symfony/process": "~2.1"
+                "symfony/process": "~2.1|~3.0"
             },
             "conflict": {
-                "twig/twig": "<1.12"
+                "twig/twig": "<1.23"
             },
             "require-dev": {
-                "cssmin/cssmin": "*",
-                "joliclic/javascript-packer": "*",
-                "kamicane/packager": "*",
+                "cssmin/cssmin": "3.0.1",
+                "joliclic/javascript-packer": "1.1",
+                "kamicane/packager": "1.0",
                 "leafo/lessphp": "^0.3.7",
-                "leafo/scssphp": "*@dev",
-                "leafo/scssphp-compass": "*@dev",
-                "mrclay/minify": "*",
+                "leafo/scssphp": "~0.1",
+                "mrclay/minify": "~2.2",
                 "patchwork/jsqueeze": "~1.0|~2.0",
                 "phpunit/phpunit": "~4.8",
                 "psr/log": "~1.0",
-                "ptachoire/cssembed": "*",
-                "symfony/phpunit-bridge": "~2.7",
+                "ptachoire/cssembed": "~1.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
                 "twig/twig": "~1.8|~2.0"
             },
             "suggest": {
@@ -354,7 +351,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -383,7 +380,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-08-31 19:07:16"
+            "time": "2015-11-12 13:51:40"
         },
         {
             "name": "robloach/component-installer",
@@ -534,34 +531,34 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.4",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Process.git",
-                "reference": "f7b3f73f70a7f8f49a1c838dc3debbf054732d8e"
+                "url": "https://github.com/symfony/process.git",
+                "reference": "e6f1f98bbd355d209a992bfff45e7edfbd4a0776"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/f7b3f73f70a7f8f49a1c838dc3debbf054732d8e",
-                "reference": "f7b3f73f70a7f8f49a1c838dc3debbf054732d8e",
+                "url": "https://api.github.com/repos/symfony/process/zipball/e6f1f98bbd355d209a992bfff45e7edfbd4a0776",
+                "reference": "e6f1f98bbd355d209a992bfff45e7edfbd4a0776",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
+                "php": ">=5.5.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Process\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -579,20 +576,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-27 06:45:45"
+            "time": "2016-03-30 10:41:14"
         },
         {
             "name": "twig/twig",
-            "version": "v1.21.2",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3"
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
-                "reference": "ddce1136beb8db29b9cd7dffa8ab518b978c9db3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +602,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.21-dev"
+                    "dev-master": "1.24-dev"
                 }
             },
             "autoload": {
@@ -640,7 +637,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-09 05:28:51"
+            "time": "2016-01-25 21:22:18"
         }
     ],
     "packages-dev": [],

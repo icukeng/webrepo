@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-while inotifywait -e close_write job.json
-do php ./execute.php
-done
+inoticoming --foreground --logfile /tmp/i.log /home/michael/PhpStormProjects/webrepo \
+--suffix "-job.json" --stdout-to-log --stderr-to-log \
+--chdir /home/michael/PhpStormProjects/webrepo \
+php execute.php {} \;
