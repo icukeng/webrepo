@@ -61,11 +61,11 @@ var getStatus = function (el) {
 	}).done(function(data) {
 		// check for finishing command execution
 		if(data === 'true') {
-			$('.cssload-container[data-name=' + $(el).data('name') + ']').hide();
+			$('.load[data-name=' + $(el).data('name') + ']').hide();
 			$('.build[data-name=' + $(el).data('name') + ']').show();
 		} else {
 			$('.build[data-name=' + $(el).data('name') + ']').hide();
-			$('.cssload-container[data-name=' + $(el).data('name') + ']').show();
+			$('.load[data-name=' + $(el).data('name') + ']').show();
 		}
 		// specify shell-body by id
 		$console = $(document.getElementById($(el).data('name')));

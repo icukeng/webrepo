@@ -75,13 +75,11 @@
 					</td>
 					{% endfor %}
 					<td>
-						<button class="build btn btn-primary btn-sm" data-name="{{ p ~ '-' ~ lbl }}"
-										data-toggle="modal" data-target="#modal-execution">Build</button>
+						<img class="build" data-name="{{ p ~ '-' ~ lbl }}"
+						 data-toggle="modal" data-target="#modal-execution" src="/images/box.png" />
 						<!-- waiting icon -->
-						<div class="cssload-container" data-name="{{ p ~ '-' ~ lbl }}"
-								 data-toggle="modal" data-target="#modal-execution">
-							<div class="cssload-double-torus pull-left"></div>
-						</div>
+						<img class="load" data-name="{{ p ~ '-' ~ lbl }}"
+						 data-toggle="modal" data-target="#modal-execution" src="/images/application_osx_terminal.png" />
 					</td>
 				</tr>
 				{% set vers = versions[p].version %}
