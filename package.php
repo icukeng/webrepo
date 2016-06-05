@@ -13,6 +13,9 @@ class PackageList {
 			'arch' => $arch,
 		);
 	}
+	public function sort($callback) {
+		usort($this->list, $callback);
+	}
 	public function find() {
 		return new PackageIterator($this->list);
 	}

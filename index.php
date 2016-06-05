@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 require 'debrepo.php';
 require 'package.php';
+require 'dpkg-utils.php';
 
 $app = new \Slim\Slim(array(
 	'debug' => true,
@@ -38,6 +39,12 @@ $app->get('/', function () use($app, $SYSCONF, $USRCONF) {
 		else
 			$labeled_packages['default'][$name] = $name;
 	}
+	$registry->sort(function ($a, $b) {
+		// поскольку версия используется как ключ - придется хранить ее строкой и разваливать здесь
+		$aa = debrepo\dpkg\version_parse($a['version']);
+		$bb = debrepo\dpkg\version_parse($b['version']);
+		return -debrepo\dpkg\version_compare($aa, $bb);
+	});
 	// for standart view need grouped 
 	//   by name,
 	//   by repo -> by vers then arch's
